@@ -1,12 +1,11 @@
 #include "mutex_gaurd.h"
 
-mutex_gaurd::mutex_gaurd(LPSTR name_of_lock)
+MutexGuard::MutexGuard(LPSTR name_of_lock)
 {
-    m_name_of_lock = name_of_lock;
-    m_ghMutex = CreateMutexA(NULL, FALSE, m_name_of_lock);
+    m_ghMutex = CreateMutexA(NULL, FALSE, name_of_lock);
     m_is_lock_free = (GetLastError() != ERROR_ALREADY_EXISTS);
 }
-mutex_gaurd::~mutex_gaurd()
+MutexGuard::~MutexGuard()
 {
     if (m_is_lock_free)
     {
@@ -15,7 +14,7 @@ mutex_gaurd::~mutex_gaurd()
     CloseHandle(m_ghMutex);
 }
 
-BOOL mutex_gaurd::get_is_lock_free()
+BOOL MutexGuard::getIsLockFree()
 {
     return m_is_lock_free;
 }

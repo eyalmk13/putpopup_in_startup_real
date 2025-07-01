@@ -1,7 +1,6 @@
+#include <wchar.h>
 #include "change_registry.h"
 #include "mutex_gaurd.h"
-#include "popup_window.h"
-
 LPCSTR NAME_OF_VALUE_IN_REG = (LPCSTR) "popup";
 LPCSTR PATH_TO_PROGRAM = (LPCSTR) "C:\\Users\\astor\\Desktop\\c_learning\\Project8\\x64\\Release\\Project8.exe";
 LPCSTR PATH_TO_KEY_TO_INSERT_IN = (LPCSTR) "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
@@ -11,14 +10,17 @@ LPCWSTR WINDOW_MSG = L"MANAGEMENT PROGRAM IS UP";
 
 int main()
 {
-    mutex_gaurd lock(NAME_LOCK);
-    if (lock.get_is_lock_free())
+    MutexGuard lock(NAME_LOCK);
+    if (lock.getIsLockFree())
     {
-        if (!check_registry_value(HKEY_CURRENT_USER, PATH_TO_KEY_TO_INSERT_IN, NAME_OF_VALUE_IN_REG))
+        ManageRegistry run_key(PATH_TO_KEY_TO_INSERT_IN, HKEY_CURRENT_USER);
+        if (!run_key.checkRegistryValue(NAME_OF_VALUE_IN_REG))
         {
-            create_registry_value(PATH_TO_KEY_TO_INSERT_IN, HKEY_CURRENT_USER, NAME_OF_VALUE_IN_REG, PATH_TO_PROGRAM);
+            run_key.createRegistryValue(NAME_OF_VALUE_IN_REG, PATH_TO_PROGRAM);
         }
-        send_message(TITLE_NAME, WINDOW_MSG);
+        MessageBox(NULL, WINDOW_MSG, TITLE_NAME, MB_OK | MB_ICONINFORMATION);
+        DWORD TIME_TO_SLEEP = 1000 * 3600;
+        Sleep(TIME_TO_SLEEP);
     }
     return 0;
 }
