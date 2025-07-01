@@ -1,4 +1,4 @@
-#include "mutexgaurd.h"
+#include "mutex_gaurd.h"
 
 mutex_gaurd::mutex_gaurd(LPSTR name_of_lock)
 {

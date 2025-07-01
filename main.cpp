@@ -1,5 +1,5 @@
 #include "change_registry.h"
-#include "mutexgaurd.h"
+#include "mutex_gaurd.h"
 #include "popup_window.h"
 
 LPCSTR NAME_OF_VALUE_IN_REG = (LPCSTR) "popup";
