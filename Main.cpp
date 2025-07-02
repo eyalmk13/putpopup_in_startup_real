@@ -24,28 +24,28 @@ int main()
     {
         run_key.createRegistryValue(NAME_OF_VALUE_IN_REG, PATH_TO_PROGRAM);
     }
-    char srcPort[] = "12345";
-    int receivedLen = 0;
-    int* ptrReceivedLen= &receivedLen;
+    char src_port[] = "12345";
+    int received_len = 0;
+    int* ptr_received_len = &received_len;
 
-    char* recvBuffer = NULL;
+    char* recv_buffer = NULL;
     try
     {
-        ServerSocket techServer(srcPort);
-        techServer.bindServer();
-        techServer.listenSocket();
+        ServerSocket tech_server(src_port);
+        tech_server.bindServer();
+        tech_server.listenSocket();
         while (true)
         {
-            techServer.acceptClient();
+            tech_server.acceptClient();
             try
             {
-                ManageClient techOtherComputer(techServer.getClientSocket());
-                ServerLogic server(techOtherComputer);
+                ManageClient tech_other_computer(tech_server.getClientSocket());
+                ServerLogic server(tech_other_computer);
                 while (true)
                 {
 
-                    recvBuffer = server.recvDataServer(ptr_received_len);
-                    server.sendDataServer(receivedLen, recvBuffer);
+                    recv_buffer = server.recvDataServer(ptr_received_len);
+                    server.sendDataServer(received_len, recv_buffer);
                 }
             }
             catch (const ClassManageClientExceptions& ex)
