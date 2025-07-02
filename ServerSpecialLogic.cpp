@@ -7,13 +7,13 @@ std::string PONG = "PONG";
 std::string KNOWN_COMMAND = "PING";
 int LEN_PONG = static_cast<int>(PONG.length());
 
-ServerLogic::ServerLogic(ManageClient& tech_other_computer) : m_tech_other_computer(tech_other_computer)
+ServerLogic::ServerLogic(ManageClient& techOtherComputer) : m_tech_other_computer(techOtherComputer)
 {
 }
 
-void ServerLogic::sendDataServer(int received_len, char* recv_buffer)
+void ServerLogic::sendDataServer(int receivedLen, char* recvBuffer)
 {
-    std::string str_recieved(recv_buffer, received_len);
+    std::string str_recieved(recvBuffer, receivedLen);
     if (strcmp(KNOWN_COMMAND.c_str(), str_recieved.c_str()) == 0)
     {
         char* ptr_len_pong = (char*)(&LEN_PONG);
@@ -25,7 +25,7 @@ void ServerLogic::sendDataServer(int received_len, char* recv_buffer)
     {
         throw ClassServerLogicExceptions("Unknown command");
     }
-    delete[] recv_buffer;
+    delete[] recvBuffer;
 }
 
 char* ServerLogic::recvDataServer(int* ptr_received_len)
@@ -34,11 +34,11 @@ char* ServerLogic::recvDataServer(int* ptr_received_len)
     {
         throw ClassServerLogicExceptions("error in recvDataServer func in length recieving");
     }
-    char* recv_buffer = new char[*ptr_received_len];
-    if (*ptr_received_len != m_tech_other_computer.recv_data(recv_buffer, *ptr_received_len))
+    char* recvBuffer = new char[*ptr_received_len];
+    if (*ptrReceivedLen!= m_tech_other_computer.recv_data(recvBuffer, *ptr_received_len))
     {
         throw ClassServerLogicExceptions("error in recvDataServer function command recieving");
     }
 
-    return recv_buffer;
+    return recvBuffer;
 }

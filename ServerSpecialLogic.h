@@ -9,15 +9,15 @@ class ServerLogic
   public:
     /*
     contructor of class
-    :param tech_other_computer: instance of ManageClient to send and recieve pakcets via socket.
+    :param techOtherComputer: instance of ManageClient to send and recieve pakcets via socket.
     */
-    ServerLogic(ManageClient& tech_other_computer);
+    ServerLogic(ManageClient& techOtherComputer);
     /*
     sends data to client
-    :param received_len: the data length  recieved from client
-    :param received_len: the data recieved from client
+    :param receivedLen: the data length  recieved from client
+    :param receivedLen: the data recieved from client
     */
-    void sendDataServer(int received_len, char* recv_buffer);
+    void sendDataServer(int receivedLen, char* recvBuffer);
     /*
     recieves data from client
     :param ptr_received_len: pointer to recieved length
