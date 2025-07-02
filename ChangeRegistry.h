@@ -6,6 +6,7 @@
 
 class ManageRegistry
 {
+<<<<<<< HEAD
   public:
     /*
     constructor of class - gets a handle to the key register
@@ -13,12 +14,22 @@ class ManageRegistry
     :param hkey: the handle to the key
     */
     ManageRegistry(std::string sub_key, HKEY hkey);
+=======
+public:
+    /*
+    constructor of class - gets a handle to the key register
+    :param subKey: a string of sub key path from the main key to insert in the value
+    :param hKey: the handle to the key
+    */
+    ManageRegistry(std::string subKey, HKEY hKey);
+>>>>>>> technic
     /*
     destroyer of class - closes the handle
     */
     ~ManageRegistry();
     /*
     creates a registry value in the key given
+<<<<<<< HEAD
     :param name_to_add: the value to add
     :param data_to_store: data to store in value
     */
@@ -45,6 +56,35 @@ class ClassManageRegistryExceptions : public std::exception
   public:
     ClassManageRegistryExceptions(const std::string& msg) : message(msg)
     {
+=======
+    :param nameToAdd: the value to add
+    :param dataToStore: data to store in value
+    */
+    void createRegistryValue(std::string nameToAdd, std::string dataToStore);
+    /*
+    checks if a value is already inserted in a key or not
+    :param valueName: the value to check
+    :return: if there is the value inputted true,else false
+    */
+    BOOL checkRegistryValue(std::string valueName);
+    /*
+    returns the value of m_phkResultOpenKey
+    :return: the value of m_phkResultOpenKey
+    */
+    HKEY getPhkResultOpenKey();
+
+private:
+    HKEY m_phkResultOpenKey;
+    HKEY* m_ptr_phkResultOpenKey = &m_phkResultOpenKey;
+};
+
+class ManageRegistryExceptions : public std::exception
+{
+public:
+    ManageRegistryExceptions(const std::string& msg) : message(msg)
+    {
+    // left blank intentionally
+>>>>>>> technic
     }
 
     // Override what() from std::exception
@@ -53,6 +93,12 @@ class ClassManageRegistryExceptions : public std::exception
         return message.c_str();
     }
 
+<<<<<<< HEAD
   private:
     std::string message;
+=======
+private:
+    std::string message;
+
+>>>>>>> technic
 };
