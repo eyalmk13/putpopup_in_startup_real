@@ -37,28 +37,28 @@ int main()
     {
         std::cerr << "Caught ManageRegistryExceptions: " << ex.what() << std::endl;
     }
-    char src_port[] = "12345";
-    int received_len = 0;
-    int* ptr_received_len = &received_len;
+    char srcPort[] = "12345";
+    int receivedLen = 0;
+    int* ptrReceivedLen = &receivedLen;
 
-    char* recv_buffer = NULL;
+    char* recvBuffer = NULL;
     try
     {
-        ServerSocket tech_server(src_port);
-        tech_server.bindServer();
-        tech_server.listenSocket();
+        ServerSocket techServer(srcPort);
+        techServer.bindServer();
+        techServer.listenSocket();
         while (true)
         {
-            tech_server.acceptClient();
+            techServer.acceptClient();
             try
             {
-                ManageClient tech_other_computer(tech_server.getClientSocket());
-                ServerLogic server(tech_other_computer);
+                ManageClient techOtherComputer(techServer.getClientSocket());
+                ServerLogic server(techOtherComputer);
                 while (true)
                 {
 
-                    recv_buffer = server.recvDataServer(ptr_received_len);
-                    server.sendDataServer(received_len, recv_buffer);
+                    recvBuffer = server.recvDataServer(ptrReceivedLen);
+                    server.sendDataServer(receivedLen, recvBuffer);
                 }
             }
             catch (const ClassManageClientExceptions& ex)

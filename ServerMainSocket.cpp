@@ -3,7 +3,7 @@
 
 #define DEFAULT_PORT "12345"
 
-ServerSocket::ServerSocket(char* src_port)
+ServerSocket::ServerSocket(char* srcPort)
 {
     WSADATA wsaData;
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -19,41 +19,41 @@ ServerSocket::ServerSocket(char* src_port)
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
 
-    iResult = getaddrinfo(NULL, src_port, &hints, &m_ptr_result);
+    iResult = getaddrinfo(NULL, srcPort, &hints, &m_ptrResult);
     if (iResult != 0)
     {
         throw ClassServerSocketyExceptions("getaddrinfo failed in ServerSocket func");
     }
     else
     {
-        m_socket_listen = socket(m_ptr_result->ai_family, m_ptr_result->ai_socktype, m_ptr_result->ai_protocol);
+        m_socketListen = socket(m_ptrResult->ai_family, m_ptrResult->ai_socktype, m_ptrResult->ai_protocol);
     }
 }
 ServerSocket::~ServerSocket()
 {
-    if (m_socket_listen != INVALID_SOCKET)
+    if (m_socketListen != INVALID_SOCKET)
     {
-        closesocket(m_socket_listen);
+        closesocket(m_socketListen);
     }
 
-    if (m_client_socket != INVALID_SOCKET)
+    if (m_clientSocket != INVALID_SOCKET)
     {
-        closesocket(m_client_socket);
+        closesocket(m_clientSocket);
     }
-    if (m_ptr_result != nullptr)
+    if (m_ptrResult != nullptr)
     {
-        freeaddrinfo(m_ptr_result);
+        freeaddrinfo(m_ptrResult);
     }
     WSACleanup();
 }
 
 SOCKET ServerSocket::getClientSocket()
 {
-    return m_client_socket;
+    return m_clientSocket;
 }
 void ServerSocket::bindServer()
 {
-    int iResult = bind(m_socket_listen, m_ptr_result->ai_addr, (int)m_ptr_result->ai_addrlen);
+    int iResult = bind(m_socketListen, m_ptrResult->ai_addr, (int)m_ptrResult->ai_addrlen);
     if (iResult == SOCKET_ERROR)
     {
         throw ClassServerSocketyExceptions("something went wrong in bindServer");
@@ -62,7 +62,7 @@ void ServerSocket::bindServer()
 
 void ServerSocket::listenSocket()
 {
-    if (listen(m_socket_listen, SOMAXCONN) == SOCKET_ERROR)
+    if (listen(m_socketListen, SOMAXCONN) == SOCKET_ERROR)
     {
         throw ClassServerSocketyExceptions("something went wrong in listenSocket");
     }
@@ -70,10 +70,10 @@ void ServerSocket::listenSocket()
 
 void ServerSocket::acceptClient()
 {
-    m_client_socket = INVALID_SOCKET;
+    m_clientSocket = INVALID_SOCKET;
 
-    m_client_socket = accept(m_socket_listen, NULL, NULL);
-    if (m_client_socket == INVALID_SOCKET)
+    m_clientSocket = accept(m_socketListen, NULL, NULL);
+    if (m_clientSocket == INVALID_SOCKET)
     {
         throw ClassServerSocketyExceptions("something went wrong in acceptClient");
     }

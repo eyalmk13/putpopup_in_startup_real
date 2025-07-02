@@ -15,9 +15,9 @@ class ManageClient
   public:
     /*
     contructor of class
-    :param socket_to_client: instance of SOCKET to send and recieve pakcets from client.
+    :param socketToClient: instance of SOCKET to send and recieve pakcets from client.
     */
-    ManageClient(SOCKET socket_to_client);
+    ManageClient(SOCKET socketToClient);
     /*
     destroyer of class - closes the socket with client
     */
@@ -36,7 +36,7 @@ class ManageClient
     void send_data(const char* send_buff, int len);
 
   private:
-    SOCKET m_socket_to_client = NULL;
+    SOCKET m_socketToClient = NULL;
 };
 
 class ClassManageClientExceptions : public std::exception
