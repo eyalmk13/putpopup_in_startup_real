@@ -1,6 +1,5 @@
 #ifndef POPUP_H
 #define POPUP_H
-#include <emmintrin.h>
 #include <Windows.h>
 #include <exception>
 #include <iostream>
@@ -8,7 +7,7 @@
 
 class ManageRegistry
 {
-  public:
+public:
     /*
     constructor of class - gets a handle to the key register
     :param sub_key: a string of sub key path from the main key to insert in the value
@@ -37,17 +36,17 @@ class ManageRegistry
     */
     HKEY getPhkResultOpenKey();
 
-  private:
+private:
     HKEY m_phkResult_open_key;
     HKEY* m_ptr_phkResult_open_key = &m_phkResult_open_key;
 };
 
 class ClassManageRegistryExceptions : public std::exception
 {
-  private:
+private:
     std::string message;
 
-  public:
+public:
     ClassManageRegistryExceptions(const std::string& msg) : message(msg)
     {
     }
