@@ -1,10 +1,11 @@
-
-#ifndef SPECIAL_H
-#define SPECIAL_H
-#include "client_manage_socket.h"
+#pragma once
+#include "ClientManageSocket.h"
 
 class ServerLogic
 {
+    /*
+    manages a the server of tecnic communication with client.
+    */
   public:
     /*
     contructor of class
@@ -25,7 +26,7 @@ class ServerLogic
     char* recvDataServer(int* ptr_received_len);
 
   private:
-      ManageClient& m_tech_other_computer;
+    ManageClient& m_tech_other_computer;
 };
 
 class ClassServerLogicExceptions : public std::exception
@@ -44,5 +45,3 @@ class ClassServerLogicExceptions : public std::exception
         return message.c_str();
     }
 };
-
-#endif

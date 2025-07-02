@@ -1,5 +1,4 @@
-#ifndef POPUP_H
-#define POPUP_H
+#pragma once
 #include <Windows.h>
 #include <exception>
 #include <iostream>
@@ -13,7 +12,7 @@ class ManageRegistry
     :param sub_key: a string of sub key path from the main key to insert in the value
     :param hkey: the handle to the key
     */
-    ManageRegistry(LPCSTR sub_key, HKEY hkey);
+    ManageRegistry(std::string sub_key, HKEY hkey);
     /*
     destroyer of class - closes the handle
     */
@@ -23,13 +22,13 @@ class ManageRegistry
     :param name_to_add: the value to add
     :param data_to_store: data to store in value
     */
-    void createRegistryValue(LPCSTR name_to_add, LPCSTR data_to_store);
+    void createRegistryValue(std::string name_to_add, std::string data_to_store);
     /*
     checks if a value is already inserted in a key or not
     :param value_name: the value to check
     :return: if there is the value inputted true,else false
     */
-    BOOL checkRegistryValue(LPCSTR value_name);
+    BOOL checkRegistryValue(std::string value_name);
     /*
     returns the value of m_phkResult_open_key
     :return: the value of m_phkResult_open_key
@@ -43,9 +42,6 @@ class ManageRegistry
 
 class ClassManageRegistryExceptions : public std::exception
 {
-  private:
-    std::string message;
-
   public:
     ClassManageRegistryExceptions(const std::string& msg) : message(msg)
     {
@@ -56,6 +52,7 @@ class ClassManageRegistryExceptions : public std::exception
     {
         return message.c_str();
     }
-};
 
-#endif
+  private:
+    std::string message;
+};

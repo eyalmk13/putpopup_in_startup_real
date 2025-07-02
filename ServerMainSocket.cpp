@@ -1,5 +1,5 @@
 
-#include "server_main_socket.h"
+#include "ServerMainSocket.h"
 
 #define DEFAULT_PORT "12345"
 
@@ -12,7 +12,7 @@ ServerSocket::ServerSocket(char* src_port)
         throw ClassServerSocketyExceptions("WSAStartup failed in ServerSocket func");
     }
 
-    struct addrinfo  hints;
+    struct addrinfo hints;
     ZeroMemory(&hints, sizeof(hints));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
@@ -47,7 +47,6 @@ ServerSocket::~ServerSocket()
     WSACleanup();
 }
 
-
 SOCKET ServerSocket::getClientSocket()
 {
     return m_client_socket;
@@ -68,8 +67,6 @@ void ServerSocket::listenSocket()
         throw ClassServerSocketyExceptions("something went wrong in listenSocket");
     }
 }
-
-
 
 void ServerSocket::acceptClient()
 {

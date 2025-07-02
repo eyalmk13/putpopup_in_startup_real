@@ -1,5 +1,4 @@
-#ifndef SOCKET_H
-#define SOCKET_H
+#pragma once
 #include <exception>
 #include <iostream>
 #include <string>
@@ -8,6 +7,9 @@
 
 class ServerSocket
 {
+    /*
+    manages a classic server listening
+    */
   public:
     /*
     constructor of class
@@ -20,7 +22,7 @@ class ServerSocket
     */
     ~ServerSocket();
     /*
-    binds the server 
+    binds the server
     */
     void bindServer();
     /*
@@ -37,13 +39,11 @@ class ServerSocket
     */
     SOCKET getClientSocket();
 
-
   private:
     SOCKET m_socket_listen;
     SOCKET m_client_socket;
     struct addrinfo* m_ptr_result;
 };
-
 
 class ClassServerSocketyExceptions : public std::exception
 {
@@ -61,5 +61,3 @@ class ClassServerSocketyExceptions : public std::exception
         return message.c_str();
     }
 };
-
-#endif

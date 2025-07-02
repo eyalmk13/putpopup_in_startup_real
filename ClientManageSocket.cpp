@@ -1,4 +1,4 @@
-#include "client_manage_socket.h"
+#include "ClientManageSocket.h"
 #define INTEGER_LENGTH (4)
 
 ManageClient::ManageClient(SOCKET socket_to_client)
@@ -9,7 +9,6 @@ ManageClient::ManageClient(SOCKET socket_to_client)
 ManageClient::~ManageClient()
 {
     closesocket(m_socket_to_client);
-    
 }
 int ManageClient::recv_data(char* recvbuf, int recvbuflen)
 {
@@ -26,12 +25,12 @@ int ManageClient::recv_data(char* recvbuf, int recvbuflen)
     throw ClassManageClientExceptions("error in receiving from client");
 }
 
-void ManageClient::send_data(char* send_buff, int len)
+void ManageClient::send_data(const char* send_buff, int len)
 {
     int iSendResult;
 
     iSendResult = send(m_socket_to_client, send_buff, len, 0);
-   
+
     if (iSendResult == SOCKET_ERROR)
     {
         throw ClassManageClientExceptions("send to client failed");
