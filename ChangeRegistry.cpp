@@ -8,6 +8,7 @@ ManageRegistry::ManageRegistry(std::string subKey, HKEY hKey)
     if (status_open_key != ERROR_SUCCESS)
     {
         throw ManageRegistryExceptions("ManageRegistry function went wrong");
+
     }
 }
 ManageRegistry::~ManageRegistry()
@@ -19,7 +20,6 @@ ManageRegistry::~ManageRegistry()
         std::cerr << "Error: Failed to close registry key" << std::endl;
     }
 }
-
 
 void ManageRegistry::createRegistryValue(std::string nameToAdd, std::string dataToStore)
 {
@@ -51,5 +51,5 @@ BOOL ManageRegistry::checkRegistryValue(std::string valueName)
 }
 HKEY ManageRegistry::getPhkResultOpenKey()
 {
-    return m_phkResultOpenKey;
+    return m_phkResult_open_key;
 }

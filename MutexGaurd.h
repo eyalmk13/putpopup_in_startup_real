@@ -11,7 +11,7 @@ public:
     :param nameOfLock: the name of lock.
     */
     MutexGuard(std::string nameOfLock);
-    /*
+  /*
     destroyer of class - close handle and if thye lock is on our possesion - realeses lock
     */
     ~MutexGuard();
@@ -20,7 +20,6 @@ public:
     */
     MutexGuard(const MutexGuard&) = delete;
     MutexGuard& operator=(const MutexGuard&) = delete;
-
 
 private:
     HANDLE m_lockHandle;
@@ -34,8 +33,7 @@ public:
     {
         // left blank intentionally
     }
-
-    const char* what() const noexcept override
+const char* what() const noexcept override
     {
         return message.c_str();
     }
