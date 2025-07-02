@@ -1,6 +1,5 @@
 #ifndef POPUP_H
 #define POPUP_H
-#include <emmintrin.h>
 #include <Windows.h>
 #include <exception>
 #include <iostream>

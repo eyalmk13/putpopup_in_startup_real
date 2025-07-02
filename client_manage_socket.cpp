@@ -1,9 +1,5 @@
-#pragma comment(lib, "Ws2_32.lib")
 #include "client_manage_socket.h"
-#include <stdio.h>
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
+#define INTEGER_LENGTH (4)
 
 ManageClient::ManageClient(SOCKET socket_to_client)
 {
@@ -26,20 +22,18 @@ int ManageClient::recv_data(char* recvbuf, int recvbuflen)
     else if (iResult_recv == 0)
     {
         throw ClassManageClientExceptions("socket closed in other side");
-        return 0;
     }
     throw ClassManageClientExceptions("error in receiving from client");
-    return 0;
 }
 
-void ManageClient::send_data(char *send_buff)
+void ManageClient::send_data(char* send_buff, int len)
 {
-    int len = strlen(send_buff);
     int iSendResult;
+
     iSendResult = send(m_socket_to_client, send_buff, len, 0);
+   
     if (iSendResult == SOCKET_ERROR)
     {
         throw ClassManageClientExceptions("send to client failed");
     }
-
 }

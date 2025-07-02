@@ -1,10 +1,10 @@
 #include "change_registry.h"
 #include <cstring>
-#pragma comment(lib, "advapi32.lib")
 
 ManageRegistry::ManageRegistry(LPCSTR sub_key, HKEY hkey)
 {
     LSTATUS result_check;
+    m_phkResult_open_key = NULL;
     result_check = RegOpenKeyA(hkey, sub_key, m_ptr_phkResult_open_key);
     if (result_check != ERROR_SUCCESS)
     {
@@ -21,11 +21,10 @@ ManageRegistry::~ManageRegistry()
     }
 }
 
-
 void ManageRegistry::createRegistryValue(LPCSTR name_to_add, LPCSTR data_to_store)
 {
     LSTATUS result_check;
-    size_t data_to_store_len= strlen(data_to_store) + 1;
+    size_t data_to_store_len = strlen(data_to_store) + 1;
     DWORD size_data = static_cast<DWORD>(data_to_store_len);
     const BYTE* data_to_store_bytes = reinterpret_cast<const BYTE*>(data_to_store);
     result_check = RegSetValueExA(m_phkResult_open_key, name_to_add, NULL, REG_SZ, data_to_store_bytes, size_data);
@@ -34,7 +33,6 @@ void ManageRegistry::createRegistryValue(LPCSTR name_to_add, LPCSTR data_to_stor
         throw ClassManageRegistryExceptions("createRegistryValue function went wrong");
     }
 }
-
 
 BOOL ManageRegistry::checkRegistryValue(LPCSTR value_name)
 {

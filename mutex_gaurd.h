@@ -1,6 +1,5 @@
 #ifndef MUTEX_GAURD_H
 #define MUTEX_GAURD_H
-#include <emmintrin.h>
 #include <Windows.h>
 
 class MutexGuard

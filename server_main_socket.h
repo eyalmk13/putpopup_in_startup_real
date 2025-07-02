@@ -1,25 +1,47 @@
 #ifndef SOCKET_H
 #define SOCKET_H
-#include <Windows.h>
 #include <exception>
 #include <iostream>
 #include <string>
+#include <winsock2.h>
+#include <ws2tcpip.h>
 
 class ServerSocket
 {
   public:
+    /*
+    constructor of class
+    :param src_port: the port to listen from as a server
+    */
     ServerSocket(char* src_port);
+    /*
+    destroyer of class
+    frees addr info data and does WSACleanup.
+    */
     ~ServerSocket();
+    /*
+    binds the server 
+    */
     void bindServer();
+    /*
+    makes the server to listen to clients
+    */
     void listenSocket();
+    /*
+    makes the server to accepets a client
+    */
     void acceptClient();
+    /*
+    gets the socket the server is in contact with a client
+    :return: m_client_socket
+    */
     SOCKET getClientSocket();
 
 
   private:
-    SOCKET m_socket_listen = NULL;
-    SOCKET m_client_socket = NULL;
-    struct addrinfo** m_ptr_result = NULL;
+    SOCKET m_socket_listen;
+    SOCKET m_client_socket;
+    struct addrinfo* m_ptr_result;
 };
 
 
