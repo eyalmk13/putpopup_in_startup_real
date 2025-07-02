@@ -1,9 +1,6 @@
-
 #include "ServerMainSocket.h"
 
-#define DEFAULT_PORT "12345"
-
-ServerSocket::ServerSocket(char* srcPort)
+ServerSocket::ServerSocket(std::string srcPort)
 {
     WSADATA wsaData;
     int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -19,7 +16,7 @@ ServerSocket::ServerSocket(char* srcPort)
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
 
-    iResult = getaddrinfo(NULL, srcPort, &hints, &m_ptrResult);
+    iResult = getaddrinfo(NULL, srcPort.c_str(), &hints, &m_ptrResult);
     if (iResult != 0)
     {
         throw ClassServerSocketyExceptions("getaddrinfo failed in ServerSocket func");

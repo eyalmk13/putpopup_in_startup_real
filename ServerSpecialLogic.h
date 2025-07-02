@@ -17,13 +17,13 @@ class ServerLogic
     :param receivedLen: the data length  recieved from client
     :param receivedLen: the data recieved from client
     */
-    void sendDataServer(int receivedLen, char* recvBuffer);
+    void sendDataServer(int receivedLen, std::string recvBuffer);
     /*
     recieves data from client
     :param ptrReceivedLen: pointer to recieved length
     :return: the recieved data
     */
-    char* recvDataServer(int* ptrReceivedLen);
+    std::string  recvDataServer(int* ptrReceivedLen);
 
   private:
     ManageClient& m_techOtherComputer;

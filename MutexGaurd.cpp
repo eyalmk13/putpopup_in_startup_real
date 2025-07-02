@@ -19,7 +19,7 @@ MutexGuard::~MutexGuard()
     if (!ReleaseMutex(m_lockHandle))
     {
         DWORD error = GetLastError();
-        std::cerr << "Error: Failed to close registry key error code : "<< std::to_string(error)<< std::endl;
+        std::cerr << "Error: Failed to realese mutex key error code : "<< std::to_string(error)<< std::endl;
     }
     if (!CloseHandle(m_lockHandle))
     {

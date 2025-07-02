@@ -25,9 +25,6 @@ int main()
         {
             runKey.createRegistryValue(NAME_OF_VALUE_IN_REG, PATH_TO_PROGRAM);
         }
-        MessageBoxA(NULL, WINDOW_MSG.c_str(), TITLE_NAME.c_str(), MB_OK | MB_ICONINFORMATION);
-        DWORD TIME_TO_SLEEP = 1000 * 3600;
-        Sleep(TIME_TO_SLEEP);
     }
     catch (const MutexGuardExceptions& ex)
     {
@@ -37,11 +34,10 @@ int main()
     {
         std::cerr << "Caught ManageRegistryExceptions: " << ex.what() << std::endl;
     }
-    char srcPort[] = "12345";
+    std::string srcPort = "12345";
     int receivedLen = 0;
-    int* ptrReceivedLen = &receivedLen;
-
-    char* recvBuffer = NULL;
+    
+    std::string recvBuffer;
     try
     {
         ServerSocket techServer(srcPort);
@@ -57,7 +53,7 @@ int main()
                 while (true)
                 {
 
-                    recvBuffer = server.recvDataServer(ptrReceivedLen);
+                    recvBuffer = server.recvDataServer(&receivedLen);
                     server.sendDataServer(receivedLen, recvBuffer);
                 }
             }

@@ -1,5 +1,4 @@
 #include "ClientManageSocket.h"
-#define INTEGER_LENGTH (4)
 
 ManageClient::ManageClient(SOCKET socketToClient)
 {

@@ -15,7 +15,7 @@ class ServerSocket
     constructor of class
     :param srcPort: the port to listen from as a server
     */
-    ServerSocket(char* srcPort);
+    ServerSocket(std::string srcPort);
     /*
     destroyer of class
     frees addr info data and does WSACleanup.

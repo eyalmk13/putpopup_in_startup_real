@@ -51,5 +51,5 @@ BOOL ManageRegistry::checkRegistryValue(std::string valueName)
 }
 HKEY ManageRegistry::getPhkResultOpenKey()
 {
-    return m_phkResult_open_key;
+    return *m_ptr_phkResultOpenKey;
 }
