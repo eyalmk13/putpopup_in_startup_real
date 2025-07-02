@@ -13,9 +13,9 @@ class ServerSocket
   public:
     /*
     constructor of class
-    :param src_port: the port to listen from as a server
+    :param srcPort: the port to listen from as a server
     */
-    ServerSocket(char* src_port);
+    ServerSocket(std::string srcPort);
     /*
     destroyer of class
     frees addr info data and does WSACleanup.
@@ -35,14 +35,14 @@ class ServerSocket
     void acceptClient();
     /*
     gets the socket the server is in contact with a client
-    :return: m_client_socket
+    :return: m_clientSocket
     */
     SOCKET getClientSocket();
 
   private:
-    SOCKET m_socket_listen;
-    SOCKET m_client_socket;
-    struct addrinfo* m_ptr_result;
+    SOCKET m_socketListen;
+    SOCKET m_clientSocket;
+    struct addrinfo* m_ptrResult;
 };
 
 class ClassServerSocketyExceptions : public std::exception

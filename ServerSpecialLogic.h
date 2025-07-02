@@ -9,29 +9,24 @@ class ServerLogic
   public:
     /*
     contructor of class
-    :param tech_other_computer: instance of ManageClient to send and recieve pakcets via socket.
+    :param techOtherComputer: instance of ManageClient to send and recieve pakcets via socket.
     */
-    ServerLogic(ManageClient& tech_other_computer);
+    ServerLogic(ManageClient& techOtherComputer);
     /*
     sends data to client
-    :param received_len: the data length  recieved from client
-    :param received_len: the data recieved from client
+    :param receivedLen: the data length  recieved from client
+    :param receivedLen: the data recieved from client
     */
-    void sendDataServer(int received_len, char* recv_buffer);
+    void sendDataServer(int receivedLen, std::string recvBuffer);
     /*
     recieves data from client
-    :param ptr_received_len: pointer to recieved length
+    :param ptrReceivedLen: pointer to recieved length
     :return: the recieved data
     */
-    char* recvDataServer(int* ptr_received_len);
-    /*
-    creates proccess that is the execution of the file given.
-    :param path:path to file
-    */
-    /*void createProccess(const char* path);*/
+    std::string  recvDataServer(int* ptrReceivedLen);
 
   private:
-    ManageClient& m_tech_other_computer;
+    ManageClient& m_techOtherComputer;
 };
 
 class ClassServerLogicExceptions : public std::exception

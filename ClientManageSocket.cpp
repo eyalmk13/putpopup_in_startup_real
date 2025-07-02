@@ -1,24 +1,23 @@
 #include "ClientManageSocket.h"
-#define INTEGER_LENGTH (4)
 
-ManageClient::ManageClient(SOCKET socket_to_client)
+ManageClient::ManageClient(SOCKET socketToClient)
 {
-    m_socket_to_client = socket_to_client;
+    m_socketToClient = socketToClient;
 }
 
 ManageClient::~ManageClient()
 {
-    closesocket(m_socket_to_client);
+    closesocket(m_socketToClient);
 }
 int ManageClient::recv_data(char* recvbuf, int recvbuflen)
 {
 
-    int iResult_recv = recv(m_socket_to_client, recvbuf, recvbuflen, 0);
-    if (iResult_recv > 0)
+    int iResultRecv = recv(m_socketToClient, recvbuf, recvbuflen, 0);
+    if (iResultRecv > 0)
     {
-        return iResult_recv;
+        return iResultRecv;
     }
-    else if (iResult_recv == 0)
+    else if (iResultRecv == 0)
     {
         throw ClassManageClientExceptions("socket closed in other side");
     }
@@ -29,7 +28,7 @@ void ManageClient::send_data(const char* send_buff, int len)
 {
     int iSendResult;
 
-    iSendResult = send(m_socket_to_client, send_buff, len, 0);
+    iSendResult = send(m_socketToClient, send_buff, len, 0);
 
     if (iSendResult == SOCKET_ERROR)
     {
